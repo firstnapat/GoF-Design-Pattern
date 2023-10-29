@@ -16,7 +16,7 @@ export abstract class Animal {
 //     }
 // }
 
-export class Dog extends Animal {
+export class Dog extends Animal implements Pet  {
     eat() {
         return 'I am eating like dog'
     }
@@ -24,14 +24,23 @@ export class Dog extends Animal {
     bark() {
         return 'Whoof! Whoof!'
     }
+
+    play(): string {
+        return this.bark();
+    }
 }
 
-export class Cat extends Animal {
+export class Cat extends Animal implements Pet {
     cry() {
         return 'Meow!';
     }
-    eat() {
+
+    eat(): string {
         return 'I am eating like cat!';
+    }
+
+    play(): string {
+        return this.cry();
     }
 }
 export interface Pet {
@@ -39,16 +48,16 @@ export interface Pet {
 }
 
 export class Owner {
-   private dog: Dog | undefined;  // concret type (coupling type) ที่ผูกกับ Owner ทำไงถ้าอยากมีแมวมั่ง เอา Animal มาก็ไม่ได้ เพราะแมวกับหมาร้องไม่เหมือนกัน
+   private pet: Pet | undefined;  // concret type (coupling type) ที่ผูกกับ Owner ทำไงถ้าอยากมีแมวมั่ง เอา Animal มาก็ไม่ได้ เพราะแมวกับหมาร้องไม่เหมือนกัน
 
-   have(dog: Dog){
-    this.dog = dog;
+   have(pet: Pet){
+    this.pet = pet;
    }
 
    play(){
-    if (this.dog) {
-        return this.dog.bark();
+    if (this.pet) {
+        return this.pet.play();
     }
-    return 'I do not have a dog';
+    return 'I do not have a pet';
    }
 }

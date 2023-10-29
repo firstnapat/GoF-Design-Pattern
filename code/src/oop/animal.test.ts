@@ -1,4 +1,4 @@
-import { Animal, Dog, Owner } from "./animal";
+import { Animal, Cat, Dog, Owner, Pet } from "./animal";
 
 describe('Animal', () => {
     // it('should be abloe to eat', () => {
@@ -25,8 +25,14 @@ describe('Dog', () => {
 describe('Owner', () => {
      it('should be able to play with dog', () => {
        const owner = new Owner();
-       const dog = new Dog('Poodle');
-       owner.have(dog);
+       
+       let pet: Pet = new Dog('Poodle');
+       owner.have(pet);
+
        expect(owner.play()).toBe("Whoof! Whoof!");
+
+       pet = new Cat('Thai');
+       owner.have(pet);
+       expect(owner.play()).toBe('Meow!');
     });
 });
